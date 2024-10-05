@@ -17,6 +17,7 @@ import "./index.css";
 import store from "./Store/Store.js";
 import SubHome from "./Components/Home/SubHome.jsx";
 import SingleProduct from "./Components/Single_Product/SingleProduct.jsx";
+import Sign_Up from "./Components/Profile/Sign_Up.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -24,8 +25,11 @@ const router = createBrowserRouter(
       <Route path="/collection" element={<AllCollection />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="profile" element={<Profile />} />
+      <Route path="/profile/sign up" element={<Sign_Up />} />
+
       <Route path="/collection/:id" element={<SingleProduct />} />
       <Route path="/:id" element={<SingleProduct />} />
+      
 
 
     </Route>

@@ -16,7 +16,9 @@ function Header() {
     <header className="shadow-md  bg-white fixed top-0 right-0 left-0 ">
       <nav className="flex justify-between items-center lg:px-16 lg:py-5 md:px-12 px-3 py-3">
         <div>
-          <NavLink to={"/"}><h1 className="text-xl md:text-2xl">𝔸ℙℕ𝔸_𝔼ℂ𝕆𝕄 </h1></NavLink>
+          <NavLink to={"/"}>
+            <h1 className="text-xl md:text-2xl text-[brown]  ">𝐀𝐏𝐍𝐀-𝐄𝐂𝐎𝐌 </h1>
+          </NavLink>
         </div>
         <div className="hidden lg:block">
           <ul className="flex gap-10">
@@ -25,8 +27,8 @@ function Header() {
                 to={"/"}
                 className={({ isActive }) =>
                   isActive
-                    ?"text-orange-500"
-                    : ""
+                    ? "font-bold underline underline-offset-8"
+                    : "font-semibold"
                 }
               >
                 Home
@@ -37,8 +39,8 @@ function Header() {
                 to={"/collection"}
                 className={({ isActive }) =>
                   isActive
-                    ?  "text-orange-500"
-                    : ""
+                    ? "font-bold underline underline-offset-8"
+                    : "font-semibold"
                 }
               >
                 <span className="flex items-center space-x-2">
@@ -54,8 +56,8 @@ function Header() {
                 to={"/cart"}
                 className={({ isActive }) => {
                   isActive
-                    ? "text-orange-500"
-                    : "";
+                    ? "font-bold underline underline-offset-8"
+                    : "font-semibold";
                 }}
               >
                 <span className="flex items-center ">
@@ -71,14 +73,14 @@ function Header() {
                 to={"/profile"}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-orange-500"
-                    : ""
+                    ? "font-bold underline underline-offset-8"
+                    : "font-semibold"
                 }
               >
                 <span className="flex items-center">
                   Profile
                   <span>
-                    <IoPersonCircleSharp size={20}/>
+                    <IoPersonCircleSharp size={20} />
                   </span>
                 </span>
               </NavLink>
