@@ -102,7 +102,7 @@ function AllCollection() {
       <div className="md:pl-5">
         <h1 className="text-2xl  ">All Collection</h1>
         {loading ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-5 lg:gap-8 pb-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-5  pb-10">
             {allProduct.map((item) => (
               <Link to={`${item.id}`} key={item.id}>
                 <div

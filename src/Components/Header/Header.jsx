@@ -3,19 +3,20 @@ import { BiMenu } from "react-icons/bi";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-
+import { BsCart4 } from "react-icons/bs";
+import { IoPersonCircleSharp } from "react-icons/io5";
+import { BiCollection } from "react-icons/bi";
 function Header() {
   const [menu, setMenu] = useState(false);
-  const count = useSelector((store)=>store.cartSlice.length)
-  console.log(count)
+  const count = useSelector((store) => store.cartSlice.length);
   const handleMenu = () => {
     setMenu(!menu);
   };
   return (
-    <div className="shadow-md  bg-white fixed top-0 right-0 left-0 ">
+    <header className="shadow-md  bg-white fixed top-0 right-0 left-0 ">
       <nav className="flex justify-between items-center lg:px-16 lg:py-5 md:px-12 px-3 py-3">
         <div>
-          <h1 className="font-semibold text-xl text-orange-600">Apna-Ecom</h1>
+          <NavLink to={"/"}><h1 className="text-xl md:text-2xl">𝔸ℙℕ𝔸_𝔼ℂ𝕆𝕄 </h1></NavLink>
         </div>
         <div className="hidden lg:block">
           <ul className="flex gap-10">
@@ -23,7 +24,9 @@ function Header() {
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
-                  isActive ? "underline  underline-offset-8 font-bold" : "font-semibold"
+                  isActive
+                    ?"text-orange-500"
+                    : ""
                 }
               >
                 Home
@@ -33,35 +36,73 @@ function Header() {
               <NavLink
                 to={"/collection"}
                 className={({ isActive }) =>
-                  isActive ? "underline  underline-offset-8 font-bold" : "font-semibold"
+                  isActive
+                    ?  "text-orange-500"
+                    : ""
                 }
               >
-                Collection
+                <span className="flex items-center space-x-2">
+                  Collection{" "}
+                  <span>
+                    <BiCollection size={20} />
+                  </span>
+                </span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to={"/cart"}
-                className={({ isActive }) =>
-                  isActive ? "underline  underline-offset-8 font-bold" : "font-semibold"
-                }
+                className={({ isActive }) => {
+                  isActive
+                    ? "text-orange-500"
+                    : "";
+                }}
               >
-                Cart <span className=" rounded-[100%] px-2 py-0  bg-red-500 text-sm">{count}</span>
+                <span className="flex items-center ">
+                  <BsCart4 size={20} />
+                  <span className="rounded-full text-[10px] font-semibold text-white bg-black px-[4px]">
+                    {count}
+                  </span>
+                </span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to={"/profile"}
                 className={({ isActive }) =>
-                  isActive ? "underline  underline-offset-8 font-bold" : "font-semibold"
+                  isActive
+                    ? "text-orange-500"
+                    : ""
                 }
               >
-                Profile
+                <span className="flex items-center">
+                  Profile
+                  <span>
+                    <IoPersonCircleSharp size={20}/>
+                  </span>
+                </span>
               </NavLink>
             </li>
           </ul>
         </div>
-        <div className="lg:hidden">
+        <div className="flex items-center space-x-2 lg:hidden">
+          <li className="flex ">
+            <NavLink
+              to={"/cart"}
+              className={({ isActive }) => {
+                isActive
+                  ? "underline  underline-offset-8 font-bold"
+                  : "font-semibold";
+              }}
+            >
+              <span className="flex items-center ">
+                <BsCart4 />
+                <span className="rounded-full text-[10px] font-semibold text-white bg-black px-[4px]">
+                  {count}
+                </span>
+              </span>
+            </NavLink>
+          </li>
           <BiMenu
             onClick={handleMenu}
             className={`${menu ? "hidden" : "block"}`}
@@ -122,7 +163,7 @@ function Header() {
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
   );
 }
 

@@ -10,7 +10,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   async function fetchingProduct() {
-    const f1 = await fetch("https://fakestoreapi.in/api/products?limit=13");
+    const f1 = await fetch("https://fakestoreapi.in/api/products?limit=20");
     setLoading(true);
     const f2 = await f1.json();
     setProduct(f2.products);
@@ -26,12 +26,12 @@ function Home() {
         ---Latest Collection---
       </h1>
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10">
+        <div className="grid grid-cols-2 md:text-xl md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-5 pb-10">
           {product.map((item) => (
             <Link to={`${item.id}`} onClick={()=>{
               dispatch(setInitialState(item.id))
             }} key={item.id}>
-              <div className="p-2 border shadow-md" key={item.id}>
+              <div className="p-2 border text-[11px] md:text-[15px]  shadow-md" key={item.id}>
                 <img src={item.image} alt="" className="bg-cover" />
                 <p className="bg-red-600 text-sm rounded-sm text-slate-100 w-fit px-3 py-[2px]">
                   {item.discount}% off
