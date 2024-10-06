@@ -2,20 +2,13 @@ import React from "react";
 import { BiCopyright } from "react-icons/bi";
 import { BsTwitterX } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { FaFacebook, FaInstagram } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Footer() {
-  const navigate = useNavigate();
-  const handleBackToTop = (e) => {
-    navigate("");
-  };
   return (
     <>
-      <div className="bg-slate-700 text-center py-3 shadow-md text-gray-200 font-semibold hover:bg-slate-600  cursor-pointer">
-        <button onClick={navigate}>Back To Top</button>
-      </div>
+     
       <div className="bg-slate-800  text-gray-200 ">
         <div className="px-5 grid grid-cols-2  lg:grid-cols-4 gap-10 py-10 ">
           <div className="mx-auto">

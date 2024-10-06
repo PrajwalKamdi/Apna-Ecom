@@ -122,6 +122,7 @@ function Header() {
         className={`inset-0 h-screen ${menu ? "block" : "hidden"}`}
         onClick={handleMenu}
       >
+        <hr />
         <ul className="mt-[100px] flex flex-col gap-10 text-center">
           <li>
             <NavLink
