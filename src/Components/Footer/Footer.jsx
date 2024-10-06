@@ -9,8 +9,8 @@ function Footer() {
   return (
     <>
      
-      <div className="bg-slate-800  text-gray-200 ">
-        <div className="px-5 grid grid-cols-2  lg:grid-cols-4 gap-10 py-10 ">
+      <div className="px-5 bg-slate-800  text-gray-200 ">
+        <div className=" grid grid-cols-2  lg:grid-cols-4 gap-10 py-10 ">
           <div className="mx-auto">
             <h3 className="text-xl capitalize py-1">get to know us </h3>
             <ul>
@@ -80,14 +80,14 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pb-10">
+        <div className="pb-10 text-[14px] lg:text-[16px]">
           <div className="flex space-x-1 items-center justify-center pt-10">
-            <BiCopyright size={20} />
-            <p>2024 All Rights Reserved</p>
+            <BiCopyright size={18} />
+            <p>2024 All Rights Reserved @APNA-ECOM </p>
           </div>
-          <div className="flex space-x-1 items-center justify-center ">
-            <p>Made With </p>
-            <FaHeart size={20} color="red" />
+          <div className="flex  space-x-1 items-center justify-center ">
+            <p>Developed By Prajwal </p>
+            <FaHeart size={15} color="red" />
           </div>
         </div>
       </div>
