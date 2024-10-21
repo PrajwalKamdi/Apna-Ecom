@@ -1,13 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../Store/CartSlice";
 import { MdDelete } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as LinkRoll } from "react-scroll";
 function Cart() {
   const value = useSelector((store) => store.cartSlice);
-  const [price, setPrice] = useState([]);
+  const price = [];
+  const [total, setTotal] = useState([]);
   const dispatch = useDispatch();
-  let ok = 0;
+  let Total = 0;
+  useEffect(() => {
+    price.map((item) => Total = Total + item);
+    setTotal(Total);
+  }, [value]);
   return (
     <>
       <div className="mt-[80px] gap-5 lg:px-16 px-5" id="cart">
@@ -17,11 +22,9 @@ function Cart() {
         <div className="">
           {value.map((item) => (
             <div
+              onLoad={price.push(item.price)}
               key={item.id}
               className="grid grid-cols-3 border text-[8px] md:text-[15px] items-center p-2 md:gap-5 md:p-5 mb-10"
-              onLoad={() => {
-                setPrice(item.price);
-              }}
             >
               <img
                 src={item.image}
@@ -29,10 +32,8 @@ function Cart() {
                 className="h-[80px] md:h-[150px] mx-auto"
               />
               <div>
-                <p>
-                  <span className="font-semibold">Price : </span>
-                  {item.price}
-                  <span className="text-green-500     ">$</span>
+                <p  className="font-semibold">
+                  Price : {item.price}
                 </p>
                 <p className="capitalize">
                   <span className="font-semibold ">Brand : </span>
@@ -48,7 +49,6 @@ function Cart() {
                   className="p-[2px] md:p-2 border bg-slate-200 font-semibold rounded-sm flex items-center space-x-3"
                   onClick={() => {
                     dispatch(cartAction.removeFromCart(item));
-                    setPrice(price - item.price);
                   }}
                 >
                   Delete <MdDelete />
@@ -59,12 +59,12 @@ function Cart() {
 
           <div className="border text-[10px] md:text-[15px] my-10 p-5">
             <p className="">
-              Total : {price}
+              Total : {total}
               <span className="text-green-600">$</span>
             </p>
-            <p>Delivery Fee : 10$</p>
+            <p>Delivery Fee : 1$</p>
             <p>
-              Total : {price + 10}
+              Total : {total + 1}
               <span className="text-green-600">$</span>
             </p>
             <button

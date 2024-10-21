@@ -8,16 +8,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App.jsx";
+import Cart from "./Components/Cart/Cart.jsx";
 import AllCollection from "./Components/Collection/AllCollection.jsx";
 import Home from "./Components/Home/Home.jsx";
-import Cart from "./Components/Cart/Cart.jsx";
 import Profile from "./Components/Profile/Profile.jsx";
 
+import Sign_Up from "./Components/Profile/Sign_Up.jsx";
+import SingleProduct from "./Components/Single_Product/SingleProduct.jsx";
 import "./index.css";
 import store from "./Store/Store.js";
-import SubHome from "./Components/Home/SubHome.jsx";
-import SingleProduct from "./Components/Single_Product/SingleProduct.jsx";
-import Sign_Up from "./Components/Profile/Sign_Up.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
