@@ -1,32 +1,43 @@
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../Store/CartSlice";
-import Topbtn  from "../Top-Btn/Topbtn";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import Topbtn from "../Top-Btn/Topbtn";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import shopping from "/src/assets/shopping.png";
 export function Cart() {
   const cart = "cart";
   const value = useSelector((store) => store.cartSlice);
   const dispatch = useDispatch();
   const priceArray = [];
-  const no=value.length;
+  const no = value.length;
   value.forEach((item) => priceArray.push(item.price));
   const sum = priceArray.reduce((pre, cur) => pre + cur, 0);
   const notify = (message) => {
     toast(message, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,
       progress: undefined,
-      theme:"light",
-      type:"info",
-      className: 'bg-white text-black  p-3 rounded-md',
+      theme: "light",
+      type: "success",
+      className: "bg-white text-black  p-3 rounded-md",
     });
   };
+  if (no == 0) {
+    return (
+      <div className="text-center py-10 mt-10">
+        <img src={shopping} alt="Empty Cart" className="mx-auto mb-4" />
+        <h2 className="text-xl font-semibold">Your Cart is Empty</h2>
+        <p className="text-gray-500">
+          Add items to your cart to see them here.
+        </p>
+      </div>
+    );
+  }
   return (
     <>
       <div className="mt-[80px] gap-5 lg:px-16 px-5" id="cart">
@@ -80,13 +91,12 @@ export function Cart() {
             </p>
             <button
               className="bg-yellow-400  p-1 md:p-2 rounded-sm"
-              onClick={
-                () => {
-                if (sum > 2) {
-                  notify(`Order Placed Successfully! for ${no} ${no == 1 ? "item" : "items"}`);
-                } else {
-                  notify("Can't place order as no item in cart");
-                }
+              onClick={() => {
+                notify(
+                  `Order Placed Successfully! for ${no} ${
+                    no == 1 ? "item" : "items"
+                  }`
+                );
               }}
             >
               Place Order{" "}
@@ -101,7 +111,3 @@ export function Cart() {
 }
 
 export default Cart;
-
-
-
-

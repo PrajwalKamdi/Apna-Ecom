@@ -8,13 +8,13 @@ import Topbtn from "../Top-Btn/Topbtn";
 import SubHome from "./SubHome";
 
 function Home() {
-  const id ="/";
+  const id = "/";
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products"],
     queryFn: () => {
       return axios.get("https://fakestoreapi.in/api/products?limit=15");
     },
-    enabled:true
+    enabled: true,
   });
   if (isError) {
     <div>
@@ -36,38 +36,32 @@ function Home() {
             <PiSpinner size={50} className="animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:text-xl md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-5 pb-10">
+          <div className="grid grid-cols-2  lg:grid-cols-5 gap-2 md:gap-5  pb-10">
             {data?.data.products.map((item) => (
-              <NavLink
-                to={`${item.id}`}
-                onClick={() => {
-                  dispatch(setInitialState(item.id));
-                }}
-                key={item.id}
-              >
+              <Link to={`${item.id}`} key={item.id}>
                 <div
-                  className="p-2 border text-[11px] md:text-[15px]  shadow-md"
-                  key={item.id}
+                  className="p-2 border shadow-md text-sm"
+                  onClick={() => {
+                    dispatch(setInitialState(item.id));
+                  }}
                 >
-                  <img src={item.image} alt="" className="bg-cover" />
+                  <img src={item.image} alt={item.brand} className="" />
                   <p className="bg-red-600 text-sm rounded-sm text-slate-100 w-fit px-3 py-[2px]">
                     {item.discount}% off
                   </p>
-
                   <p className="font-semibold">
-                    {item.price}
-                    <span className="text-green-500">$</span>
+                    {item.price} <span className="text-green-500">$</span>
                   </p>
                   <p className="capitalize font-semibold line-clamp-1">
                     {item.brand} {item.model}
                   </p>
                 </div>
-              </NavLink>
+              </Link>
             ))}
           </div>
         )}
       </div>
-     <Topbtn goto={id}/>
+      <Topbtn goto={id} />
     </>
   );
 }
