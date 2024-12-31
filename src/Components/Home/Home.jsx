@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
-import SubHome from "./SubHome";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import React from "react";
 import { PiSpinner } from "react-icons/pi";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import { setInitialState } from "../../Store/HomeItemSlice";
-import { Link as LinkRoll } from "react-scroll";
+import Topbtn from "../Top-Btn/Topbtn";
+import SubHome from "./SubHome";
 
 function Home() {
-  const navigate = useNavigate();
-  const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  async function fetchingProduct() {
-    const f1 = await fetch("https://fakestoreapi.in/api/products?limit=20");
-    setLoading(true);
-    const f2 = await f1.json();
-    setProduct(f2.products);
+  const id ="/";
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => {
+      return axios.get("https://fakestoreapi.in/api/products?limit=15");
+    },
+    enabled:true
+  });
+  if (isError) {
+    <div>
+      <p>{error.message}</p>
+      <p>Please try again later!</p>
+    </div>;
   }
-  useEffect(() => {
-    fetchingProduct();
-  }, []);
 
   return (
     <>
@@ -28,10 +30,15 @@ function Home() {
         <h1 className="py-5 text-xl md:text-2xl lg:text-3xl text-center font-semibold font-sans uppercase ">
           ---Latest Collection---
         </h1>
-        {loading ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <p className="text-2xl">Loading</p>
+            <PiSpinner size={50} className="animate-spin" />
+          </div>
+        ) : (
           <div className="grid grid-cols-2 md:text-xl md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-5 pb-10">
-            {product.map((item) => (
-              <Link
+            {data?.data.products.map((item) => (
+              <NavLink
                 to={`${item.id}`}
                 onClick={() => {
                   dispatch(setInitialState(item.id));
@@ -54,23 +61,13 @@ function Home() {
                   <p className="capitalize font-semibold line-clamp-1">
                     {item.brand} {item.model}
                   </p>
-                  {/* <p>{item.category}</p> */}
                 </div>
-              </Link>
+              </NavLink>
             ))}
-          </div>
-        ) : (
-          <div className="flex items-center justify-center">
-            <p className="text-2xl">Loading</p>
-            <PiSpinner size={50} className="animate-spin" />
           </div>
         )}
       </div>
-      <div className="bg-slate-700 text-center py-3 shadow-md text-gray-200 font-semibold hover:bg-slate-600  cursor-pointer">
-        <LinkRoll to="/" duration={500} smooth={true} offset={-80} activeClass="active">
-          Back To Top
-        </LinkRoll>
-      </div>
+     <Topbtn goto={id}/>
     </>
   );
 }

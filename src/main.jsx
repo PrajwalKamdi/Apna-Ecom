@@ -12,11 +12,12 @@ import Cart from "./Components/Cart/Cart.jsx";
 import AllCollection from "./Components/Collection/AllCollection.jsx";
 import Home from "./Components/Home/Home.jsx";
 import Profile from "./Components/Profile/Profile.jsx";
-
 import Sign_Up from "./Components/Profile/Sign_Up.jsx";
 import SingleProduct from "./Components/Single_Product/SingleProduct.jsx";
 import "./index.css";
 import store from "./Store/Store.js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -30,10 +31,14 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <RouterProvider router={router}></RouterProvider>
+      </Provider>
+      <ReactQueryDevtools initialIsOpen={false}/>
+    </QueryClientProvider>
   </StrictMode>
 );

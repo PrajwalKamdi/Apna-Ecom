@@ -27,8 +27,8 @@ function Header() {
                 to={"/"}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold underline underline-offset-8"
-                    : "font-semibold"
+                    ? " underline underline-offset-4 font-serif  text-orange-500 "
+                    : "font-normal"
                 }
               >
                 Home
@@ -39,8 +39,8 @@ function Header() {
                 to={"/collection"}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold underline underline-offset-8"
-                    : "font-semibold"
+                    ? " underline underline-offset-4 font-serif  text-orange-500 "
+                    : "font-normal"
                 }
               >
                 <span className="flex items-center space-x-2">
@@ -56,8 +56,8 @@ function Header() {
                 to={"/cart"}
                 className={({ isActive }) => {
                   isActive
-                    ? "font-bold underline underline-offset-8"
-                    : "font-semibold";
+                    ? " underline underline-offset-4 font-serif  text-orange-500 "
+                    : "font-normal";
                 }}
               >
                 <span className="flex items-center ">
@@ -73,8 +73,8 @@ function Header() {
                 to={"/profile"}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold underline underline-offset-8"
-                    : "font-semibold"
+                    ? " underline underline-offset-4 font-serif  text-orange-500 "
+                    : "font-normal"
                 }
               >
                 <span className="flex items-center">
@@ -93,8 +93,8 @@ function Header() {
               to={"/cart"}
               className={({ isActive }) => {
                 isActive
-                  ? "underline  underline-offset-8 font-bold"
-                  : "font-semibold";
+                  ? " underline underline-offset-4 font-serif  text-orange-500 "
+                  : "font-normal";
               }}
             >
               <span className="flex items-center ">

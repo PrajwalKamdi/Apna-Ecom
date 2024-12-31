@@ -1,45 +1,67 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { cartAction } from "../../Store/CartSlice";
-import { Link as LinkRoll } from "react-scroll";
+import Topbtn from "../Top-Btn/Topbtn";
 
 function SingleProduct() {
-  const value = useSelector((store) => store.HomeItemSlice);
-  const [singleProduct, setSingleProduct] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { id } = useParams();
   const cartItem = useSelector((store) => store.cartSlice);
   const dispatch = useDispatch();
-  async function getSingleProduct() {
-    const f1 = await fetch(`https://fakestoreapi.in/api/products/${value}`);
-    const f2 = await f1.json();
-    setSingleProduct(f2.product);
-  }
-  const addToCart = () => {
-    dispatch(cartAction.addItemToCart(singleProduct));
-    setIsSuccess("Product Added Successfully !");
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 3000);
+  const url = `https://fakestoreapi.in/api/products/${id}`;
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["single",id],
+    queryFn: () => {
+      return axios.get(url);
+    }
+  });
+  const notify = (message) => {
+    toast(message, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      type: "success",
+      className: "bg-white text-black  p-3 rounded-md",
+    });
   };
-  useEffect(() => {
-    getSingleProduct();
-  }, []);
+  const addToCart = () => {
+    dispatch(cartAction.addItemToCart(data?.data.product));
+    notify("Product added successfully");
+  };
+  const single = "single";
+
   return (
     <>
-      <div className="mt-[80px] px-2 md:px-16 pb-10 grid grid-cols-1 md:grid-cols-2 md:gap-10" id="single">
+      <div
+        className="mt-[80px] px-2 md:px-16 pb-10 grid grid-cols-1 md:grid-cols-2 md:gap-10"
+        id="single"
+      >
         <div className="flex p-2  shadow-md">
           <div>
-            <img src={singleProduct.image} alt="" className="" />
+            <img
+              src={data?.data.product.image}
+              alt="img"
+              className="md:px-10"
+            />
           </div>
         </div>
         <div className="border shadow-md p-5">
           <p className="bg-red-600 text-sm rounded-sm text-slate-100 w-fit px-3 py-[2px]">
-            {singleProduct.discount}% off
+            {data?.data.product.discount}% off
           </p>
           <p className="font-semibold">
-            {singleProduct.price} <span className="text-green-500">$</span>
+            {data?.data.product.price} <span className="text-green-500">$</span>
           </p>
-          <p className="font-semibold">{singleProduct.title}</p>
+          <p className="font-semibold">{data?.data.product.title}</p>
           <div className="w-full border p-2 rounded-md">
             <label htmlFor="quantity">Quantity : </label>
             <select name="quantity" id="quantity" className="outline-none">
@@ -51,15 +73,12 @@ function SingleProduct() {
             </select>
           </div>
           <div>
-            {isSuccess ? (
-              <div className="border bg-green-500 py-2 w-full rounded-md px-2 my-2">
-                {isSuccess}
-              </div>
-            ) : null}
+            <ToastContainer />
           </div>
           <div className="my-2">
             <button
-              className="py-2 md:py-3 px-5 lg:text-lg font-semibold rounded-3xl w-full  bg-yellow-400 hover:bg-yellow-500"
+              className={`py-2 md:py-3 px-5 lg:text-lg font-semibold rounded-3xl w-full  bg-yellow-400 hover:bg-yellow-500 
+              }`}
               onClick={addToCart}
             >
               Add To Cart
@@ -76,41 +95,31 @@ function SingleProduct() {
 
           <p>
             <span className="font-semibold">Description : </span>
-            {singleProduct.description}
+            {data?.data.product.description}
           </p>
           <p className="capitalize">
             {" "}
             <span className="font-semibold">Brand : </span>
-            {singleProduct.brand}
+            {data?.data.product.brand}
           </p>
           <p className="capitalize">
             {" "}
             <span className="font-semibold ">Model : </span>
-            {singleProduct.model}
+            {data?.data.product.model}
           </p>
           <p className="capitalize">
             {" "}
             <span className="font-semibold ">Color : </span>
-            {singleProduct.color}
+            {data?.data.product.color}
           </p>
           <p className="capitalize">
             {" "}
             <span className="font-semibold">Category : </span>
-            {singleProduct.category}
+            {data?.data.product.category}
           </p>
         </div>
       </div>
-      <div className="bg-slate-700 text-center py-3 shadow-md text-gray-200 font-semibold hover:bg-slate-600  cursor-pointer">
-        <LinkRoll
-          to="single"
-          duration={500}
-          smooth={true}
-          offset={-80}
-          activeClass="active"
-        >
-          Back To Top
-        </LinkRoll>
-      </div>
+      <Topbtn goto={single} />
     </>
   );
 }

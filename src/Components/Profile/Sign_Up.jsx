@@ -1,7 +1,9 @@
 import React from "react";
 import { Form, Link } from "react-router-dom";
 import { Link as LinkRoll } from "react-scroll";
+import Topbtn from "../Top-Btn/Topbtn";
 function Sign_Up() {
+  const sign="sign-up";
   return (
     <>
       <div className="mt-[80px] md:px-16 my-10  px-3 md:w-[70%] mx-auto text-[12px] md:text-[15px] " id="sign-up">
@@ -81,17 +83,7 @@ function Sign_Up() {
           </p>
         </Form>
       </div>
-      <div className="bg-slate-700 text-center py-3 shadow-md text-gray-200 font-semibold hover:bg-slate-600  cursor-pointer">
-        <LinkRoll
-          to="sign-up"
-          duration={500}
-          smooth={true}
-          offset={-80}
-          activeClass="active"
-        >
-          Back To Top
-        </LinkRoll>
-      </div>
+    <Topbtn goto={sign}/>
     </>
   );
 }
