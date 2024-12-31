@@ -29,7 +29,7 @@ export function Cart() {
   };
   if (no == 0) {
     return (
-      <div className="text-center py-10 mt-10">
+      <div className="text-center py-10">
         <img src={shopping} alt="Empty Cart" className="mx-auto mb-4" />
         <h2 className="text-xl font-semibold">Your Cart is Empty</h2>
         <p className="text-gray-500">
