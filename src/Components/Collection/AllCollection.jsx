@@ -36,6 +36,7 @@ function AllCollection() {
                 type="radio"
                 id="all"
                 name="cat"
+                defaultChecked
                 onClick={() => setValue("")}
               />
               <label htmlFor="all">All</label>
