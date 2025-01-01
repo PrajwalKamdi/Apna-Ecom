@@ -13,7 +13,6 @@ function Home() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
-  const id = "/";
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products", page],
     queryFn: () => {
@@ -84,7 +83,7 @@ function Home() {
           </button>
         </div>
       </div>
-      <Topbtn goto={id} />
+      <Topbtn />
     </>
   );
 }

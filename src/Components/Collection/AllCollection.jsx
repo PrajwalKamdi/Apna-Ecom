@@ -10,8 +10,6 @@ import PageError from "../Error/PageError";
 function AllCollection() {
   const [value, setValue] = useState("");
   const [para, setPara] = useState("");
-
-  const all = "all";
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products", value, para],
     queryFn: () => {
@@ -158,7 +156,7 @@ function AllCollection() {
         </div>
       </div>
 
-      <Topbtn goto={all} />
+      <Topbtn />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -38,10 +38,12 @@ function SingleProduct() {
     dispatch(cartAction.addItemToCart(data?.data.product));
     notify("Product added successfully");
   };
-  const single = "single";
   if (isError) {
     return <PageError message={error} />;
   }
+   useEffect(() => {
+     window.scrollTo({top:0, behavior:"auto"});
+   }, []);
 
   return (
     <>
@@ -139,7 +141,7 @@ function SingleProduct() {
         </div>
       )}
 
-      <Topbtn goto={single} />
+      <Topbtn />
     </>
   );
 }

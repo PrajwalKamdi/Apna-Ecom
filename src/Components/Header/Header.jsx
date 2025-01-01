@@ -20,15 +20,15 @@ function Header() {
             <h1 className="text-xl md:text-2xl text-[brown]  ">𝐀𝐏𝐍𝐀-𝐄𝐂𝐎𝐌 </h1>
           </NavLink>
         </div>
-        <div className="hidden lg:block">
-          <ul className="flex gap-10">
+        <div className="hidden lg:block ">
+          <ul className="flex  gap-10">
             <li>
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
                   isActive
-                    ? " underline underline-offset-4  text-xl font-serif  text-orange-500 "
-                    : "font-normal text-xl"
+                    ? "  text-lg font-serif text-orange-500 "
+                    : "text-lg font-serif"
                 }
               >
                 Home
@@ -39,14 +39,14 @@ function Header() {
                 to={"/collection"}
                 className={({ isActive }) =>
                   isActive
-                    ? " underline underline-offset-4 font-serif  text-orange-500 "
-                    : "font-normal"
+                    ? " text-lg font-serif  text-orange-500 "
+                    : "text-lg font-serif"
                 }
               >
-                <span className="flex items-center text-xl space-x-2">
+                <span className="flex items-center text-lg font-serif space-x-2">
                   Collection{" "}
                   <span>
-                    <BiCollection size={25} />
+                    <BiCollection size={22} />
                   </span>
                 </span>
               </NavLink>
@@ -56,13 +56,13 @@ function Header() {
                 to={"/cart"}
                 className={({ isActive }) => {
                   isActive
-                    ? " underline underline-offset-4 font-serif  text-orange-500 "
-                    : "font-normal";
+                    ? " text-lg font-serif text-orange-500 "
+                    : "text-lg font-serif";
                 }}
               >
-                <span className="flex items-center ">
-                  <BsCart4 size={25} />
-                  <span className="rounded-full text-[10px] font-semibold text-white bg-black px-[4px]">
+                <span className="flex  items-center ">
+                  <BsCart4 size={22} />
+                  <span className="rounded-full text-[12px] font-semibold text-white bg-gray-600 px-[4px]">
                     {count}
                   </span>
                 </span>
@@ -73,14 +73,14 @@ function Header() {
                 to={"/profile"}
                 className={({ isActive }) =>
                   isActive
-                    ? " underline underline-offset-4 font-serif  text-orange-500 "
-                    : "font-normal"
+                    ? " text-lg font-serif text-orange-500 "
+                    : "text-lg font-serif"
                 }
               >
-                <span className="flex items-center text-xl">
+                <span className="flex items-center text-lg font-serif">
                   Profile
                   <span>
-                    <IoPersonCircleSharp size={30} color="gray" />
+                    <IoPersonCircleSharp size={22} color="gray" />
                   </span>
                 </span>
               </NavLink>

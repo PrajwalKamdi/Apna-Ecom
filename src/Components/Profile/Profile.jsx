@@ -1,9 +1,7 @@
 import React from "react";
 import { Form, Link } from "react-router-dom";
-import { Link as LinkRoll } from "react-scroll";
 import Topbtn from "../Top-Btn/Topbtn";
 function Profile() {
-  const profile = "profile";
   return (
     <>
     <div className="mt-[80px] md:px-16  px-3 md:w-[50%] mx-auto " id="profile">
@@ -19,7 +17,7 @@ function Profile() {
       </Form>
     
     </div>
-    <Topbtn goto={profile}/>
+    <Topbtn />
     </>
   );
 }

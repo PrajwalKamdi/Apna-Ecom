@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import shopping from "/src/assets/shopping.png";
 export function Cart() {
-  const cart = "cart";
   const value = useSelector((store) => store.cartSlice);
   const dispatch = useDispatch();
   const priceArray = [];
@@ -29,13 +28,16 @@ export function Cart() {
   };
   if (no == 0) {
     return (
-      <div className="text-center py-10">
-        <img src={shopping} alt="Empty Cart" className="mx-auto my-2" />
-        <h2 className="text-xl font-semibold">Your Cart is Empty</h2>
-        <p className="text-gray-500">
-          Add items to your cart to see them here.
-        </p>
-      </div>
+      <>
+        <div className="text-center py-10">
+          <img src={shopping} alt="Empty Cart" className="mx-auto my-2" />
+          <h2 className="text-xl font-semibold">Your Cart is Empty</h2>
+          <p className="text-gray-500">
+            Add items to your cart to see them here.
+          </p>
+        </div>
+        <Topbtn />
+      </>
     );
   }
   return (
@@ -66,7 +68,7 @@ export function Cart() {
                   {item.title}
                 </p>
               </div>
-              
+
               <div className="mx-auto">
                 <button
                   className="p-2 md:p-3 border  font-semibold rounded-md shadow-md 
@@ -107,7 +109,7 @@ export function Cart() {
           </div>
         </div>
       </div>
-      <Topbtn goto={cart} />
+      <Topbtn />
     </>
   );
 }
