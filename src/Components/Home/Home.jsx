@@ -1,28 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PiSpinner } from "react-icons/pi";
 import { Link, NavLink } from "react-router-dom";
 import { setInitialState } from "../../Store/HomeItemSlice";
 import Topbtn from "../Top-Btn/Topbtn";
 import SubHome from "./SubHome";
+import PageError from "../Error/PageError";
 
 function Home() {
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
   const id = "/";
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", page],
     queryFn: () => {
-      return axios.get("https://fakestoreapi.in/api/products?limit=15");
+      return axios.get(
+        `https://fakestoreapi.in/api/products?limit=15&page=${page}`
+      );
     },
-    enabled: true,
+    placeholderData: keepPreviousData,
   });
-  if (isError) {
-    <div>
-      <p>{error.message}</p>
-      <p>Please try again later!</p>
-    </div>;
-  }
 
+  if (isError) {
+    return <PageError message={error} />;
+  }
   return (
     <>
       <div className="mt-[80px] md:px-16 px-3" id="/">
@@ -61,9 +65,27 @@ function Home() {
           </div>
         )}
       </div>
+      <hr className="px-20" />
+      <div className="flex justify-center my-5">
+        <div className="space-x-5">
+          <button
+            className="p-2 border shadow-md rounded-md hover:bg-gray-200 hover:border-gray-300 duration-500"
+            disabled={page == 1 ? true : false}
+            onClick={() => setPage(page - 1)}
+          >
+            Previous
+          </button>
+          <button
+            className="p-2 border shadow-md rounded-md hover:bg-gray-200 hover:border-gray-300 duration-500"
+            disabled={page == 10 ? true : false}
+            onClick={() => setPage(page + 1)}
+          >
+            Next
+          </button>
+        </div>
+      </div>
       <Topbtn goto={id} />
     </>
   );
 }
-
 export default Home;

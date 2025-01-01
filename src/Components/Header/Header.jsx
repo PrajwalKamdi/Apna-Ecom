@@ -27,8 +27,8 @@ function Header() {
                 to={"/"}
                 className={({ isActive }) =>
                   isActive
-                    ? " underline underline-offset-4 font-serif  text-orange-500 "
-                    : "font-normal"
+                    ? " underline underline-offset-4  text-xl font-serif  text-orange-500 "
+                    : "font-normal text-xl"
                 }
               >
                 Home
@@ -43,10 +43,10 @@ function Header() {
                     : "font-normal"
                 }
               >
-                <span className="flex items-center space-x-2">
+                <span className="flex items-center text-xl space-x-2">
                   Collection{" "}
                   <span>
-                    <BiCollection size={20} />
+                    <BiCollection size={25} />
                   </span>
                 </span>
               </NavLink>
@@ -61,7 +61,7 @@ function Header() {
                 }}
               >
                 <span className="flex items-center ">
-                  <BsCart4 size={20} />
+                  <BsCart4 size={25} />
                   <span className="rounded-full text-[10px] font-semibold text-white bg-black px-[4px]">
                     {count}
                   </span>
@@ -77,10 +77,10 @@ function Header() {
                     : "font-normal"
                 }
               >
-                <span className="flex items-center">
+                <span className="flex items-center text-xl">
                   Profile
                   <span>
-                    <IoPersonCircleSharp size={20} />
+                    <IoPersonCircleSharp size={30} color="gray" />
                   </span>
                 </span>
               </NavLink>

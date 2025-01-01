@@ -48,7 +48,7 @@ export function Cart() {
           {value.map((item) => (
             <div
               key={item.id}
-              className="grid grid-cols-3 border text-[8px] md:text-[15px] items-center p-2 md:gap-5 md:p-5 mb-10"
+              className="bg-slate-50 grid grid-cols-3 border text-[8px] md:text-[15px] items-center p-2 md:gap-5 md:p-5 mb-10"
             >
               <img
                 src={item.image}
@@ -66,20 +66,22 @@ export function Cart() {
                   {item.title}
                 </p>
               </div>
+              
               <div className="mx-auto">
                 <button
-                  className="p-[2px] md:p-2 border bg-slate-200 font-semibold rounded-sm flex items-center space-x-3"
+                  className="p-2 md:p-3 border  font-semibold rounded-md shadow-md 
+                   hover:bg-red-300 duration-500 border-gray-300  hover:border-gray-400 flex items-center space-x-3"
                   onClick={() => {
                     dispatch(cartAction.removeFromCart(item));
                   }}
                 >
-                  Delete <MdDelete />
+                  Delete <MdDelete color="red" size={20} />
                 </button>
               </div>
             </div>
           ))}
 
-          <div className="border text-[10px] md:text-[15px] my-10 p-5">
+          <div className="border text-[10px]  md:text-[15px] my-10 p-5 bg-slate-50">
             <p className="">
               Total : {sum}
               <span className="text-green-600">$</span>
@@ -90,7 +92,7 @@ export function Cart() {
               <span className="text-green-600">$</span>
             </p>
             <button
-              className="bg-yellow-400  p-1 md:p-2 rounded-sm"
+              className="bg-yellow-400 mt-2 hover:bg-yellow-500 font-semibold  p-2 md:p-3 rounded-md shadow-md "
               onClick={() => {
                 notify(
                   `Order Placed Successfully! for ${no} ${

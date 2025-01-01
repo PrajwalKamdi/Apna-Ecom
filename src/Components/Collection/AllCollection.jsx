@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { PiSpinner } from "react-icons/pi";
@@ -6,23 +6,22 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setInitialState } from "../../Store/HomeItemSlice";
 import Topbtn from "../Top-Btn/Topbtn";
+import PageError from "../Error/PageError";
 function AllCollection() {
   const [value, setValue] = useState("");
+  const [para, setPara] = useState("");
+
   const all = "all";
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["products",value],
+    queryKey: ["products", value, para],
     queryFn: () => {
-      return axios.get(`https://fakestoreapi.in/api/products${value}`);
+      return axios.get(`https://fakestoreapi.in/api/products${value}${para}`);
     },
+    placeholderData: keepPreviousData,
   });
   const dispatch = useDispatch();
   if (isError) {
-    return (
-      <div className="text-3xl h-screen mt-32 ml-32">
-        <p>{error.message}</p>
-        <p>Please try again later!</p>
-      </div>
-    );
+    return <PageError message={error} />;
   }
   return (
     <>
@@ -36,8 +35,7 @@ function AllCollection() {
                 type="radio"
                 id="all"
                 name="cat"
-                defaultChecked
-                onClick={() => setValue("")}
+                onClick={() => setValue(`?limit=150`)}
               />
               <label htmlFor="all">All</label>
             </div>
@@ -96,10 +94,37 @@ function AllCollection() {
               <label htmlFor="app">Appliances</label>
             </div>
           </div>
+
+          <div className="border px-5 py-2 my-3">
+            <h3 className="text-2xl pb-2">Sort By</h3>
+            <div className="flex flex-col">
+              <div className="space-x-2">
+                <input
+                  type="radio"
+                  className="p-2 border shadow-md rounded-md hover:bg-gray-200 hover:border-gray-300 duration-500"
+                  id="asc"
+                  name="sort"
+                  onClick={() => setPara("&sort=asc")}
+                />
+                <label htmlFor="asc">Asc</label>
+              </div>
+              <div className="space-x-2">
+                <input
+                  type="radio"
+                  className="p-2 border shadow-md rounded-md hover:bg-gray-200 hover:border-gray-300 duration-500"
+                  id="desc"
+                  name="sort"
+                  onClick={() => setPara("&sort=desc")}
+                />
+                <label htmlFor="desc">Desc</label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="md:pl-5">
           <h1 className="text-2xl  ">All Collection</h1>
+
           {isLoading ? (
             <div className="flex items-center justify-center h-[20vh]">
               <p className="text-2xl">Loading</p>
